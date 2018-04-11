@@ -35,6 +35,7 @@ public class LogEventBroadcaster
     {
         // Binds the channel
         Channel channel = bootstrap.bind(0).sync().channel();
+        System.out.println("This servers bootstrap: " + this.bootstrap.config());
         long pointer = 0;
         while (true) // Starts the main processing loop
         {
@@ -46,6 +47,7 @@ public class LogEventBroadcaster
             }
             else if (len > pointer)
             {
+                // System.out.println("Detected a read!");
                 // Content was added
                 RandomAccessFile raf = new RandomAccessFile(file, "r");
                 // Sets the current file pointer so nothing old is sent:
@@ -85,7 +87,7 @@ public class LogEventBroadcaster
         }
 
         LogEventBroadcaster broadcaster = new LogEventBroadcaster(
-            new InetSocketAddress("255.255.255.255", Integer.parseInt(args[0])),
+            new InetSocketAddress("239.255.0.1", Integer.parseInt(args[0])),
             new File(args[1])
         );
 
